@@ -11,8 +11,21 @@ const long long max_w = 2000;
 
 // Convert from text format to binary
 void txt2bin(char * input_path, char * output_path){
-	FILE * fi = fopen(input_path, "rb");
-	FILE * fo = fopen(output_path, "wb");
+	FILE * fi;
+	FILE * fo;
+
+	if (input_path == NULL || strlen(input_path) == 0
+			|| strcmp(input_path, "-") == 0) {
+		fi = freopen(NULL, "rb", stdin);
+	} else {
+		fi = fopen(input_path, "rb");
+	}
+	if (output_path == NULL || strlen(output_path) == 0
+			|| strcmp(output_path, "-") == 0) {
+		fo = freopen(NULL, "wb", stdout);
+	} else {
+		fo = fopen(output_path, "wb");
+	}
 
 	long long words, size;
 	fscanf(fi, "%lld", &words);
@@ -57,18 +70,19 @@ void bin2txt(char * input_path, char * output_path){
 	FILE * fi;
 	FILE * fo;
 
-	if(input_path == NULL || strlen(input_path) == 0
-	   || strcmp(input_path, "-") == 0) {
+	if (input_path == NULL || strlen(input_path) == 0
+			|| strcmp(input_path, "-") == 0) {
 		fi = freopen(NULL, "rb", stdin);
 	} else {
 		fi = fopen(input_path, "rb");
 	}
-	if(output_path == NULL || strlen(output_path) == 0
-	   || strcmp(output_path, "-") == 0) {
+	if (output_path == NULL || strlen(output_path) == 0
+			|| strcmp(output_path, "-") == 0) {
 		fo = freopen(NULL, "wb", stdout);
 	} else {
 		fo = fopen(output_path, "wb");
 	}
+
 	long long words, size;
 	fscanf(fi, "%lld", &words);
 	fscanf(fi, "%lld", &size);
@@ -108,6 +122,7 @@ int main(int argc, char **argv) {
 		return 0;
 	}
 	
+	// TODO: it should be possible to sniff the input file to determine this
 	if(strcmp(argv[1], "bin2txt") == 0)
 		bin2txt(argv[2], argv[3]);
 	else if(strcmp(argv[1], "txt2bin") == 0)
