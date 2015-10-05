@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <malloc.h>
+//#include <malloc.h>
 #include <stdlib.h>
 
 const long long max_w = 2000;
@@ -54,9 +54,21 @@ void txt2bin(char * input_path, char * output_path){
 
 // Convert from binary to text format
 void bin2txt(char * input_path, char * output_path){
-	FILE * fi = fopen(input_path, "rb");
-	FILE * fo = fopen(output_path, "wb");
-	
+	FILE * fi;
+	FILE * fo;
+
+	if(input_path == NULL || strlen(input_path) == 0
+	   || strcmp(input_path, "-") == 0) {
+		fi = freopen(NULL, "rb", stdin);
+	} else {
+		fi = fopen(input_path, "rb");
+	}
+	if(output_path == NULL || strlen(output_path) == 0
+	   || strcmp(output_path, "-") == 0) {
+		fo = freopen(NULL, "wb", stdout);
+	} else {
+		fo = fopen(output_path, "wb");
+	}
 	long long words, size;
 	fscanf(fi, "%lld", &words);
 	fscanf(fi, "%lld", &size);
