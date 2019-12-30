@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <malloc.h>
 #include <stdlib.h>
 
 const long long max_w = 2000;
