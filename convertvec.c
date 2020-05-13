@@ -4,8 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <malloc.h>
 #include <stdlib.h>
+
+#ifndef __APPLE__ 
+#include <malloc.h>
+#endif
 
 const long long max_w = 2000;
 
